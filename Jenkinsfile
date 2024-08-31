@@ -22,12 +22,16 @@ pipeline {
           }
         }
         stage('trivy'){
+          agent {
+                label 'dind'
+          }
           steps {
             script {
               sh '''
-              
+              docker run aquasec/trivy repo https://github.com//Dgefo/dgefo_exam_s410_1 -f json -o json > trivy.json
               echo 'Здесь trivy!' 
               '''
+              archiveArtifacts artifacts: 'trivy.json', allowEmptyArchive: true
             }
           }
         }
