@@ -21,5 +21,15 @@ pipeline {
           archiveArtifacts artifacts: 'output-semgrep.json', allowEmptyArchive: true
           }
         }
+        stage('trivy'){
+          steps {
+            script {
+              sh '''
+              
+              echo 'Здесь trivy!' 
+              '''
+            }
+          }
+        }
     }
 }
